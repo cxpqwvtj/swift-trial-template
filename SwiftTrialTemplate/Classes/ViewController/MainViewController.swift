@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSZipArchive
 
 class MainViewController: UIViewController {
     
@@ -26,6 +27,7 @@ class MainViewController: UIViewController {
     
     func tapButton(sender: UIButton) {
         DDLogDebug("\(sender)")
+        self.navigationController?.pushViewController(LogFileTableViewController(style: UITableViewStyle.Plain), animated: true)
     }
 }
 

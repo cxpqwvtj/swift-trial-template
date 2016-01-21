@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         AppLogger.setup()
         let infoDictionary = NSBundle.mainBundle().infoDictionary
-        DDLogInfo("[CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
-        DDLogDebug("[NSHomeDirectory]\(NSHomeDirectory())")
+        ILog("[CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
+        DLog("[NSHomeDirectory]\(NSHomeDirectory())")
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let navi = UINavigationController(rootViewController: MainViewController())
         navi.view.backgroundColor = UIColor.whiteColor()

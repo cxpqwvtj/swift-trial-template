@@ -17,7 +17,7 @@ class LogFileTableViewController: UITableViewController {
         do {
             logs = try fileManager.contentsOfDirectoryAtPath("\(NSHomeDirectory())/Library/Caches/Logs")
         } catch let error as NSError {
-            DDLogWarn("\(error)")
+            WLog("\(error)")
         }
         super.init(style: style)
     }
@@ -32,13 +32,13 @@ class LogFileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DDLogVerbose("")
+        VLog("")
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        DDLogVerbose("")
+        VLog("")
     }
 
     // MARK: - Table view data source
@@ -55,7 +55,7 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        DDLogVerbose("\(indexPath)")
+        VLog("\(indexPath)")
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         cell.textLabel?.text = logs![indexPath.row]
         
@@ -63,7 +63,7 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DDLogDebug("\(indexPath)")
+        DLog("\(indexPath)")
     }
     /*
     // Override to support conditional editing of the table view.

@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DDLogVerbose("")
+        VLog("")
         let movieSelectButton = UIButton(frame: CGRectMake(100.0, 100.0, 100.0, 29.0))
         movieSelectButton.backgroundColor = UIColor.grayColor()
         movieSelectButton.addTarget(self, action: "tapButton:", forControlEvents: .TouchUpInside)
@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     }
     
     func tapButton(sender: UIButton) {
-        DDLogDebug("\(sender)")
+        DLog("\(sender)")
         self.navigationController?.pushViewController(LogFileTableViewController(style: UITableViewStyle.Plain), animated: true)
     }
 }

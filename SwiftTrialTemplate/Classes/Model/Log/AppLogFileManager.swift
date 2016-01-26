@@ -15,9 +15,9 @@ class AppLogFileManager: DDLogFileManagerDefault {
         get {
             let dateFormatter = NSDateFormatter()
             dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-            dateFormatter.dateFormat = "yyyy-MM-dd_HHmmss"
+            dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
 
-            return "\(NSBundle.mainBundle().bundleIdentifier)\(dateFormatter.stringFromDate(NSDate())).log"
+            return "\(NSBundle.mainBundle().bundleIdentifier!)_\(dateFormatter.stringFromDate(NSDate())).log"
         }
     }
 

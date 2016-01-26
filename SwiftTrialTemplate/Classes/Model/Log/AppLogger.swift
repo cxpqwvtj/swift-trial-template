@@ -11,7 +11,7 @@ import CocoaLumberjack
 
 class AppLogger: NSObject {
     static let sharedInstance = AppLogger()
-    let fileLogger = DDFileLogger()
+    let fileLogger = DDFileLogger(logFileManager: AppLogFileManager())
 
     func setup() {
         setenv("XcodeColors", "YES", 0);

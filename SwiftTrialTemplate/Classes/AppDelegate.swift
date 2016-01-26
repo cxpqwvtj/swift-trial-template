@@ -14,14 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        AppLogger.setup()
+        AppLogger.sharedInstance.setup()
         let infoDictionary = NSBundle.mainBundle().infoDictionary
-        ILog("[CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
+        ILog("[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
         DLog("[NSHomeDirectory]\(NSHomeDirectory())")
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let navi = UINavigationController(rootViewController: MainViewController())
         navi.view.backgroundColor = UIColor.whiteColor()
-        navi.navigationBarHidden = true
         window?.rootViewController = navi
         window?.makeKeyAndVisible()
         return true

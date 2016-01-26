@@ -10,9 +10,10 @@ import UIKit
 import CocoaLumberjack
 
 class AppLogger: NSObject {
-    static var logsDirectory: String?
+    static let sharedInstance = AppLogger()
+    let fileLogger = DDFileLogger()
 
-    static func setup() {
+    func setup() {
         setenv("XcodeColors", "YES", 0);
         DDTTYLogger.sharedInstance().logFormatter = AppLogFormatter()
         DDTTYLogger.sharedInstance().colorsEnabled = true
@@ -24,11 +25,9 @@ class AppLogger: NSObject {
         DDASLLogger.sharedInstance().logFormatter = AppLogFormatter()
         DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
 
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
         fileLogger.logFormatter = AppLogFormatter()
         fileLogger.maximumFileSize = 1 * 1024 * 1024  // 1MB
         fileLogger.logFileManager.maximumNumberOfLogFiles = 10
-        logsDirectory = fileLogger.logFileManager.logsDirectory()
         DDLog.addLogger(fileLogger)
     }
 }

@@ -15,7 +15,9 @@ class LogFileTableViewController: UITableViewController {
     override init(style: UITableViewStyle) {
         let fileManager = NSFileManager()
         do {
-            logs = try fileManager.contentsOfDirectoryAtPath("\(NSHomeDirectory())/Library/Caches/Logs")
+            let logsDir = "\(AppLogger.sharedInstance.fileLogger.logFileManager.logsDirectory())"
+            DLog("[logsDir]\(logsDir)")
+            logs = try fileManager.contentsOfDirectoryAtPath(logsDir)
         } catch let error as NSError {
             WLog("\(error)")
         }
@@ -54,10 +56,23 @@ class LogFileTableViewController: UITableViewController {
         return 0
     }
 
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        let label = UILabel(frame: CGRectMake(0, 0, tableView.bounds.width - 20, 0))
+//        label.numberOfLines = 0
+//        label.lineBreakMode = NSLineBreakMode.ByCharWrapping
+//        label.text = logs![indexPath.row]
+//        label.sizeToFit()
+//        return label.frame.height + 2
+//    }
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         VLog("\(indexPath)")
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        cell.textLabel?.lineBreakMode =  NSLineBreakMode.ByWordWrapping
         cell.textLabel?.text = logs![indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         
         return cell
     }

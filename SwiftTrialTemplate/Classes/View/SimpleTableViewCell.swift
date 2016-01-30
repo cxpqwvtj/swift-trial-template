@@ -15,7 +15,8 @@ class SimpleTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(label)
-        self.addSubview(selectedMarker)
+        //self.addSubview(selectedMarker)
+        selectedMarker.backgroundColor = UIColor.orangeColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -26,8 +27,8 @@ class SimpleTableViewCell: UITableViewCell {
         fatalError("awakeFromNib() has not been implemented")
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        selectedMarker.frame = CGRectMake(0, 1, 10, self.bounds.height - 2)
     }
-
 }

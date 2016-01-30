@@ -30,11 +30,15 @@ class AppLogFileManager: DDLogFileManagerDefault {
     }
 
     override func didArchiveLogFile(logFilePath: String!) {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
-        ILog("[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
+        ILog(self.appInfo())
     }
 
     override func didRollAndArchiveLogFile(logFilePath: String!) {
+        ILog(self.appInfo())
+    }
+
+    private func appInfo() -> String {
         let infoDictionary = NSBundle.mainBundle().infoDictionary
-        ILog("[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")    }
+        return "[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)"
+    }
 }

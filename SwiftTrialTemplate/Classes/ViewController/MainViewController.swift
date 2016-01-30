@@ -14,13 +14,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         VLog("")
-        let movieSelectButton = UIButton(frame: CGRectMake(100.0, 100.0, 100.0, 29.0))
-        movieSelectButton.backgroundColor = UIColor.grayColor()
-        movieSelectButton.addTarget(self, action: "tapButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(movieSelectButton)
+        let button1 = UIButton(frame: CGRectMake(50.0, 100.0, 200.0, 29.0))
+        button1.backgroundColor = UIColor.grayColor()
+        button1.setTitle("ログファイル一覧", forState: UIControlState.Normal)
+        button1.addTarget(self, action: "tapButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(button1)
 
-        let button2 = UIButton(frame: CGRectMake(100.0, 130.0, 100.0, 29.0))
+        let button2 = UIButton(frame: CGRectMake(50.0, 130.0, 200.0, 29.0))
         button2.backgroundColor = UIColor.grayColor()
+        button2.setTitle("ログファイル切り替え", forState: UIControlState.Normal)
         button2.addTarget(self, action: "tapButton2:", forControlEvents: .TouchUpInside)
         self.view.addSubview(button2)
     }

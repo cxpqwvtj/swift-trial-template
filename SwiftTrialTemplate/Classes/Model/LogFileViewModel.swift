@@ -9,7 +9,5 @@
 import UIKit
 
 class LogFileViewModel: NSObject {
-
-    var fileName = ""
-    var selected = false
+    var rows: [LogFileRowModel]?
 }

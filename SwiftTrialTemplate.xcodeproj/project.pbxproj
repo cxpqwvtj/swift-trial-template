@@ -18,6 +18,8 @@
 		100F1A781C4C59A6002365D7 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F1A771C4C59A6002365D7 /* AppLogger.swift */; };
 		10FCE29B1C5033A00095F79A /* LogFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE29A1C5033A00095F79A /* LogFileViewModel.swift */; };
 		10FCE29D1C58189B0095F79A /* AppLogFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE29C1C58189B0095F79A /* AppLogFileManager.swift */; };
+		10FCE29F1C596EAD0095F79A /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE29E1C596EAD0095F79A /* SimpleTableViewCell.swift */; };
+		10FCE2A11C597A570095F79A /* LogFileRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE2A01C597A570095F79A /* LogFileRowModel.swift */; };
 		9A46A7D44842749B4B885341 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75332C81559BFFA7EA106A2 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 		100F1A771C4C59A6002365D7 /* AppLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		10FCE29A1C5033A00095F79A /* LogFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFileViewModel.swift; sourceTree = "<group>"; };
 		10FCE29C1C58189B0095F79A /* AppLogFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLogFileManager.swift; sourceTree = "<group>"; };
+		10FCE29E1C596EAD0095F79A /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
+		10FCE2A01C597A570095F79A /* LogFileRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFileRowModel.swift; sourceTree = "<group>"; };
 		BA6E41DAB71343F721C50E26 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C75332C81559BFFA7EA106A2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC12D180A0B9292D16E5C54E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 			children = (
 				100F1A701C4C55B1002365D7 /* Log */,
 				10FCE29A1C5033A00095F79A /* LogFileViewModel.swift */,
+				10FCE2A01C597A570095F79A /* LogFileRowModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 		100F1A711C4C55B1002365D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				10FCE29E1C596EAD0095F79A /* SimpleTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -391,8 +397,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				100F1A761C4C591E002365D7 /* AppLogFormatter.swift in Sources */,
+				10FCE29F1C596EAD0095F79A /* SimpleTableViewCell.swift in Sources */,
 				10FCE29D1C58189B0095F79A /* AppLogFileManager.swift in Sources */,
 				100F1A691C4C4C48002365D7 /* AppDelegate.swift in Sources */,
+				10FCE2A11C597A570095F79A /* LogFileRowModel.swift in Sources */,
 				1003304B1C4E622000A02985 /* LogFileTableViewController.swift in Sources */,
 				100F1A741C4C5698002365D7 /* MainViewController.swift in Sources */,
 				100F1A781C4C59A6002365D7 /* AppLogger.swift in Sources */,

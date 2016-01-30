@@ -11,17 +11,29 @@ import CocoaLumberjack
 
 class AppLogFileManager: DDLogFileManagerDefault {
 
+    let APP_NAME = NSBundle.mainBundle().bundleIdentifier!
+    let LOG_FILE_NAME_DATE_FORMAT = "yyyy-MM-dd_HH-mm-ss"
+    let LOG_FILE_NAME_SUFFIX = ".log"
+
     override var newLogFileName: String {
         get {
             let dateFormatter = NSDateFormatter()
             dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-            dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+            dateFormatter.dateFormat = LOG_FILE_NAME_DATE_FORMAT
 
-            return "\(NSBundle.mainBundle().bundleIdentifier!)_\(dateFormatter.stringFromDate(NSDate())).log"
+            return "\(APP_NAME)_\(dateFormatter.stringFromDate(NSDate()))\(LOG_FILE_NAME_SUFFIX)"
         }
     }
 
     override func isLogFile(fileName: String!) -> Bool {
-        return super.isLogFile(fileName)
+        return fileName.hasPrefix(APP_NAME) && fileName.hasSuffix(LOG_FILE_NAME_SUFFIX)
+    }
+
+    override func didArchiveLogFile(logFilePath: String!) {
+        DLog("\(logFilePath)")
+    }
+
+    override func didRollAndArchiveLogFile(logFilePath: String!) {
+        DLog("\(logFilePath)")
     }
 }

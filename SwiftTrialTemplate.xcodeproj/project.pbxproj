@@ -20,6 +20,7 @@
 		10FCE29D1C58189B0095F79A /* AppLogFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE29C1C58189B0095F79A /* AppLogFileManager.swift */; };
 		10FCE29F1C596EAD0095F79A /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE29E1C596EAD0095F79A /* SimpleTableViewCell.swift */; };
 		10FCE2A11C597A570095F79A /* LogFileRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE2A01C597A570095F79A /* LogFileRowModel.swift */; };
+		10FCE2A41C5CD59A0095F79A /* LogMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FCE2A31C5CD59A0095F79A /* LogMessageTableViewController.swift */; };
 		9A46A7D44842749B4B885341 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75332C81559BFFA7EA106A2 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		10FCE29C1C58189B0095F79A /* AppLogFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLogFileManager.swift; sourceTree = "<group>"; };
 		10FCE29E1C596EAD0095F79A /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 		10FCE2A01C597A570095F79A /* LogFileRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFileRowModel.swift; sourceTree = "<group>"; };
+		10FCE2A31C5CD59A0095F79A /* LogMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessageTableViewController.swift; sourceTree = "<group>"; };
 		BA6E41DAB71343F721C50E26 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C75332C81559BFFA7EA106A2 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC12D180A0B9292D16E5C54E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				100F1A731C4C5698002365D7 /* MainViewController.swift */,
 				1003304A1C4E622000A02985 /* LogFileTableViewController.swift */,
+				10FCE2A31C5CD59A0095F79A /* LogMessageTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10FCE2A41C5CD59A0095F79A /* LogMessageTableViewController.swift in Sources */,
 				100F1A761C4C591E002365D7 /* AppLogFormatter.swift in Sources */,
 				10FCE29F1C596EAD0095F79A /* SimpleTableViewCell.swift in Sources */,
 				10FCE29D1C58189B0095F79A /* AppLogFileManager.swift in Sources */,

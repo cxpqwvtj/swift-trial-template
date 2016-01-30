@@ -1,78 +1,78 @@
 //
-//  LogFileTableViewController.swift
+//  LogMessageTableViewController.swift
 //  SwiftTrialTemplate
 //
-//  Created by MasahiroFukuda on 2016/01/19.
+//  Created by MasahiroFukuda on 2016/01/30.
 //  Copyright (c) 2016 MasahiroFukuda. All rights reserved.
 //
 
 import UIKit
-import CocoaLumberjack
 
-class LogFileTableViewController: UITableViewController {
-
+class LogMessageTableViewController: UITableViewController {
+    
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
-    let logs: [DDLogFileInfo]
+    let logFilePath: String
+    var messages = [String]()
     var labelWidth = UIScreen.mainScreen().bounds.width
 
-    override init(style: UITableViewStyle) {
-//        let fileManager = NSFileManager()
-//        do {
-//            let logsDir = "\(AppLogger.sharedInstance.fileLogger.logFileManager.logsDirectory())"
-//            DLog("[logsDir]\(logsDir)")
-//            logs = try fileManager.contentsOfDirectoryAtPath(logsDir)
-//        } catch let error as NSError {
-//            WLog("\(error)")
-//            logs = []
-//        }
-        
-        logs = AppLogger.sharedInstance.fileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo]
+    init(style: UITableViewStyle, logFilePath: String) {
+        self.logFilePath = logFilePath
         super.init(style: style)
+    }
+    
+    override init(style: UITableViewStyle) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        VLog("")
-        self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogFileTableViewController.CELL_REUSE_ID)
-        labelWidth = self.tableView.bounds.width - 50
-    }
+        VLog("\(logFilePath)")
+        self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogMessageTableViewController.CELL_REUSE_ID)
+        labelWidth = self.tableView.bounds.width - 20
 
+        // ファイル読み込み
+        do {
+            let text = try NSString(contentsOfFile: logFilePath, encoding: NSUTF8StringEncoding) as String
+            text.enumerateLines({ (line, stop) -> () in
+                self.messages.append(line)
+            })
+        } catch let error as NSError {
+            WLog("\(error)")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        VLog("")
+        WLog("")
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return logs.count
-        }
-        return 0
+        return messages.count
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let label = UILabel()
-        setupLabel(label, message: logs[indexPath.row].fileName)
+        self.setupLabel(label, message: messages[indexPath.row])
         return label.frame.height + 2
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! SimpleTableViewCell
-        setupLabel(cell.label, message: logs[indexPath.row].fileName)
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let cell = tableView.dequeueReusableCellWithIdentifier(LogMessageTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! SimpleTableViewCell
+        self.setupLabel(cell.label, message: messages[indexPath.row])
         return cell
     }
 
@@ -84,18 +84,16 @@ class LogFileTableViewController: UITableViewController {
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             })
         }
-        self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: logs[indexPath.row].filePath), animated: true)
     }
 
     // MARK: - private method
 
     private func setupLabel(label: UILabel, message: String?) {
-        label.frame = CGRectMake(20, 1, labelWidth, 0)
-//        let label = UILabel(frame: CGRectMake(20, 1, labelWidth, 0))
+        label.frame = CGRectMake(10, 1, labelWidth, 0)
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.ByCharWrapping
         label.text = message
-        label.font = UIFont.systemFontOfSize(12)
+        label.font = UIFont.systemFontOfSize(10)
         label.sizeToFit()
     }
 }

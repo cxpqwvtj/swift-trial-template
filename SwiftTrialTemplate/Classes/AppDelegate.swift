@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         AppLogger.sharedInstance.setup()
+        NSSetUncaughtExceptionHandler { (exception) -> Void in
+            ELog("[name]\(exception.name) [reason]\(exception.reason) [userInfo]\(exception.userInfo)\n\(exception.callStackSymbols.joinWithSeparator("\n"))")
+        }
         let infoDictionary = NSBundle.mainBundle().infoDictionary
         ILog("[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
         DLog("[NSHomeDirectory]\(NSHomeDirectory())")

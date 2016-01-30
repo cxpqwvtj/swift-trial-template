@@ -91,7 +91,6 @@ class LogFileTableViewController: UITableViewController {
 
     private func setupLabel(label: UILabel, message: String?) {
         label.frame = CGRectMake(20, 1, labelWidth, 0)
-//        let label = UILabel(frame: CGRectMake(20, 1, labelWidth, 0))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.ByCharWrapping
         label.text = message

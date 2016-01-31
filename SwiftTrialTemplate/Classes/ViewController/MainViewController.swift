@@ -39,9 +39,9 @@ class MainViewController: UIViewController {
 
     func tapButton2(sender: UIButton) {
         DLog("\(sender)")
-        DLog("[ROLL BEFORE]\(AppLogger.sharedInstance.fileLogger.currentLogFileInfo().fileName)")
-        AppLogger.sharedInstance.fileLogger.rollLogFileWithCompletionBlock {
-            DLog("[ROLL AFTER]\(AppLogger.sharedInstance.fileLogger.currentLogFileInfo().fileName)")
+        DLog("[ROLL BEFORE]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")
+        AppLogger.sharedInstance.devFileLogger.rollLogFileWithCompletionBlock {
+            DLog("[ROLL AFTER]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")
         }
     }
 }

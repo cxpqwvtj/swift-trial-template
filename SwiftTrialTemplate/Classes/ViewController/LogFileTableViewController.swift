@@ -26,7 +26,7 @@ class LogFileTableViewController: UITableViewController {
 //            logs = []
 //        }
         
-        logs = AppLogger.sharedInstance.fileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo]
+        logs = AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo]
         super.init(style: style)
     }
 

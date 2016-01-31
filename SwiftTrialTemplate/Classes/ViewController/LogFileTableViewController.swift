@@ -41,11 +41,18 @@ class LogFileTableViewController: UITableViewController {
         super.viewDidLoad()
         VLog("")
         self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogFileTableViewController.CELL_REUSE_ID)
+
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "rightBarButtonTapped")
+        self.navigationItem.setRightBarButtonItems([rightBarButtonItem], animated: true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         VLog("")
+    }
+
+    func rightBarButtonTapped() {
+        DLog("")
     }
 
     // MARK: - Table view data source

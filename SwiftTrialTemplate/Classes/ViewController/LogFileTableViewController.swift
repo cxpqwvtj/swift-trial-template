@@ -13,7 +13,6 @@ class LogFileTableViewController: UITableViewController {
 
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
     let logs: [DDLogFileInfo]
-    var labelWidth = UIScreen.mainScreen().bounds.width
 
     override init(style: UITableViewStyle) {
 //        let fileManager = NSFileManager()
@@ -42,7 +41,6 @@ class LogFileTableViewController: UITableViewController {
         super.viewDidLoad()
         VLog("")
         self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogFileTableViewController.CELL_REUSE_ID)
-        labelWidth = self.tableView.bounds.width - 50
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,13 +63,13 @@ class LogFileTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let label = UILabel()
-        setupLabel(label, message: logs[indexPath.row].fileName)
+        setupLabel(label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
         return label.frame.height + 2
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! SimpleTableViewCell
-        setupLabel(cell.label, message: logs[indexPath.row].fileName)
+        setupLabel(cell.label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
@@ -89,8 +87,8 @@ class LogFileTableViewController: UITableViewController {
 
     // MARK: - private method
 
-    private func setupLabel(label: UILabel, message: String?) {
-        label.frame = CGRectMake(20, 1, labelWidth, 0)
+    private func setupLabel(label: UILabel, message: String?, tableViewWidth: CGFloat) {
+        label.frame = CGRectMake(20, 1, tableViewWidth - SimpleTableViewCell.HORIZON_MERGIN, 0)
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.ByCharWrapping
         label.text = message

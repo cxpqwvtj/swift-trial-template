@@ -40,7 +40,7 @@ class LogFileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         VLog("")
-        self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogFileTableViewController.CELL_REUSE_ID)
+        self.tableView.registerClass(LogFileTableViewCell.self, forCellReuseIdentifier: LogFileTableViewController.CELL_REUSE_ID)
 
         let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "rightBarButtonTapped")
         self.navigationItem.setRightBarButtonItems([rightBarButtonItem], animated: true)
@@ -71,33 +71,38 @@ class LogFileTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let label = UILabel()
         setupLabel(label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
-        return label.frame.height + 2
+        let height = label.frame.height + 2
+        return (height < 30) ? 30 : height
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! SimpleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogFileTableViewCell
         setupLabel(cell.label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DLog("\(indexPath)")
+        ILog("\(indexPath)")
         NSOperationQueue().addOperationWithBlock { () -> Void in
             NSThread.sleepForTimeInterval(0.1)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             })
         }
+    }
+
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        ILog("")
         self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: logs[indexPath.row].filePath), animated: true)
     }
 
     // MARK: - private method
 
     private func setupLabel(label: UILabel, message: String?, tableViewWidth: CGFloat) {
-        label.frame = CGRectMake(20, 1, tableViewWidth - SimpleTableViewCell.HORIZON_MERGIN, 0)
+        label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, tableViewWidth - LogFileTableViewCell.HORIZON_MERGIN, 0)
         label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
         label.text = message
         label.font = UIFont.systemFontOfSize(12)
         label.sizeToFit()

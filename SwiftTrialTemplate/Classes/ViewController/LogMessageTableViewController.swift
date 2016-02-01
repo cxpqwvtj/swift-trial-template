@@ -34,7 +34,7 @@ class LogMessageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         VLog("\(logFilePath)")
-        self.tableView.registerClass(SimpleTableViewCell.self, forCellReuseIdentifier: LogMessageTableViewController.CELL_REUSE_ID)
+        self.tableView.registerClass(LogMessageTableViewCell.self, forCellReuseIdentifier: LogMessageTableViewController.CELL_REUSE_ID)
 
         // ファイル読み込み
         do {
@@ -69,7 +69,7 @@ class LogMessageTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(LogMessageTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! SimpleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(LogMessageTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogMessageTableViewCell
         self.setupLabel(cell.label, message: messages[indexPath.row], tableViewWidth: tableView.bounds.width)
         return cell
     }
@@ -87,9 +87,9 @@ class LogMessageTableViewController: UITableViewController {
     // MARK: - private method
 
     private func setupLabel(label: UILabel, message: String?, tableViewWidth: CGFloat) {
-        label.frame = CGRectMake(10, 1, tableViewWidth - SimpleTableViewCell.HORIZON_MERGIN, 0)
+        label.frame = CGRectMake(15, 1, tableViewWidth - LogMessageTableViewCell.HORIZON_MERGIN, 0)
         label.numberOfLines = 0
-        label.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
         label.text = message
         label.font = UIFont.systemFontOfSize(10)
         label.sizeToFit()

@@ -12,7 +12,7 @@ import CocoaLumberjack
 class LogFileTableViewController: UITableViewController {
 
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
-    let logs: [DDLogFileInfo]
+    var logs = [LogFileRowModel]()
 
     override init(style: UITableViewStyle) {
 //        let fileManager = NSFileManager()
@@ -24,8 +24,13 @@ class LogFileTableViewController: UITableViewController {
 //            WLog("\(error)")
 //            logs = []
 //        }
-        
-        logs = AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo]
+
+        for log in AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo] {
+            let model = LogFileRowModel()
+            model.fileName = log.fileName
+            model.filePath = log.filePath
+            logs.append(model)
+        }
         super.init(style: style)
     }
 
@@ -78,6 +83,7 @@ class LogFileTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogFileTableViewCell
         setupLabel(cell.label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
+        cell.selectedMarker.hidden = !logs[indexPath.row].selected
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         return cell
     }
@@ -88,8 +94,10 @@ class LogFileTableViewController: UITableViewController {
             NSThread.sleepForTimeInterval(0.1)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
             })
         }
+        logs[indexPath.row].selected = !logs[indexPath.row].selected
     }
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {

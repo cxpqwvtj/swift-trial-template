@@ -11,5 +11,6 @@ import UIKit
 class LogFileRowModel: NSObject {
 
     var fileName = ""
+    var filePath = ""
     var selected = false
 }

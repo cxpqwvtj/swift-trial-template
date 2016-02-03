@@ -16,7 +16,7 @@ class LogFileTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(label)
-        //self.addSubview(selectedMarker)
+        self.addSubview(selectedMarker)
         selectedMarker.backgroundColor = UIColor.orangeColor()
     }
 
@@ -32,6 +32,6 @@ class LogFileTableViewCell: UITableViewCell {
         super.layoutSubviews()
         label.frame = CGRectMake(15, 1, self.frame.width - LogFileTableViewCell.HORIZON_MERGIN, 0)
         label.sizeToFit()
-        selectedMarker.frame = CGRectMake(0, 1, 15, self.bounds.height - 2)
+        selectedMarker.frame = CGRectMake(0, 1, 10, self.bounds.height - 2)
     }
 }

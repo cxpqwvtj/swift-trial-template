@@ -9,5 +9,5 @@
 import UIKit
 
 class LogFileViewModel: NSObject {
-    var rows: [LogFileRowModel]?
+    var rows = [LogFileRowModel]()
 }

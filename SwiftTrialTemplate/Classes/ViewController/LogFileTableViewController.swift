@@ -12,7 +12,7 @@ import CocoaLumberjack
 class LogFileTableViewController: UITableViewController {
 
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
-    var logs = [LogFileRowModel]()
+    var viewModel = LogFileViewModel()
 
     override init(style: UITableViewStyle) {
 //        let fileManager = NSFileManager()
@@ -25,11 +25,10 @@ class LogFileTableViewController: UITableViewController {
 //            logs = []
 //        }
 
-        for log in AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo] {
+        for logFileInfo in AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo] {
             let model = LogFileRowModel()
-            model.fileName = log.fileName
-            model.filePath = log.filePath
-            logs.append(model)
+            model.logFileInfo = logFileInfo
+            viewModel.rows.append(model)
         }
         super.init(style: style)
     }
@@ -68,22 +67,22 @@ class LogFileTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return logs.count
+            return viewModel.rows.count
         }
         return 0
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let label = UILabel()
-        setupLabel(label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
+        setupLabel(label, message: viewModel.rows[indexPath.row].logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
         let height = label.frame.height + 2
         return (height < 30) ? 30 : height
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogFileTableViewCell
-        setupLabel(cell.label, message: logs[indexPath.row].fileName, tableViewWidth: tableView.bounds.width)
-        cell.selectedMarker.hidden = !logs[indexPath.row].selected
+        setupLabel(cell.label, message: viewModel.rows[indexPath.row].logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
+        cell.selectedMarker.hidden = !viewModel.rows[indexPath.row].selected
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         return cell
     }
@@ -97,12 +96,14 @@ class LogFileTableViewController: UITableViewController {
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
             })
         }
-        logs[indexPath.row].selected = !logs[indexPath.row].selected
+        viewModel.rows[indexPath.row].selected = !viewModel.rows[indexPath.row].selected
     }
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         ILog("")
-        self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: logs[indexPath.row].filePath), animated: true)
+        if let filePath = viewModel.rows[indexPath.row].logFileInfo?.filePath {
+            self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: filePath), animated: true)
+        }
     }
 
     // MARK: - private method

@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class LogFileRowModel: NSObject {
 
-    var fileName = ""
-    var filePath = ""
+    var logFileInfo: DDLogFileInfo?
     var selected = false
 }

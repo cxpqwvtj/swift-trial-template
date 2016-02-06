@@ -26,7 +26,7 @@ class AppLogger: NSObject {
         DDASLLogger.sharedInstance().logFormatter = AppLogFormatter()
         DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
 
-        devFileLogger.logFormatter = AppLogFormatter()
+        devFileLogger.logFormatter = AppFileLogFormatter()
         devFileLogger.maximumFileSize = 1 * 1024 * 1024  // 1MB
         devFileLogger.logFileManager.maximumNumberOfLogFiles = 10
         DDLog.addLogger(devFileLogger)

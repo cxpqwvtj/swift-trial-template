@@ -20,13 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let infoDictionary = NSBundle.mainBundle().infoDictionary
         ILog("[CFBundleIdentifier]\(infoDictionary?["CFBundleIdentifier"] as! String) [CFBundleVersion]\(infoDictionary?["CFBundleVersion"] as! String) [CFBundleShortVersionString]\(infoDictionary?["CFBundleShortVersionString"] as! String)")
+        ILog("[devide name]\(UIDevice.currentDevice().name) [model]\(UIDevice.currentDevice().model) [systemName]\(UIDevice.currentDevice().systemName) [localizedModel]\(UIDevice.currentDevice().localizedModel) [systemVersion]\(UIDevice.currentDevice().systemVersion)")
         DLog("[NSHomeDirectory]\(NSHomeDirectory())")
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let navi = UINavigationController(rootViewController: MainViewController())
         navi.view.backgroundColor = UIColor.whiteColor()
         window?.rootViewController = navi
         window?.makeKeyAndVisible()
-        DLog("[devide name]\(UIDevice.currentDevice().name) [model]\(UIDevice.currentDevice().model) [systemName]\(UIDevice.currentDevice().systemName) [localizedModel]\(UIDevice.currentDevice().localizedModel) [systemVersion]\(UIDevice.currentDevice().systemVersion) []\(UIDevice.currentDevice())")
         return true
     }
 

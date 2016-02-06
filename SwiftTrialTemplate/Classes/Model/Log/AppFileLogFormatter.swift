@@ -1,27 +1,22 @@
 //
-//  AppLogFormatter.swift
+//  AppFileLogFormatter.swift
 //  SwiftTrialTemplate
 //
-//  Created by MasahiroFukuda on 2016/01/18.
+//  Created by MasahiroFukuda on 2016/02/06.
 //  Copyright (c) 2016 MasahiroFukuda. All rights reserved.
 //
 
 import UIKit
 import CocoaLumberjack
 
-class AppLogFormatter: NSObject, DDLogFormatter {
-    private(set) var threadUnsafeDateFormatter: NSDateFormatter
+class AppFileLogFormatter: AppLogFormatter {
+    static private let bundleVersion = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as! String
+    static private let bundleShortVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as! String
     
-    internal override init() {
-        threadUnsafeDateFormatter = NSDateFormatter()
-        threadUnsafeDateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-        threadUnsafeDateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
-    }
-
     /**
      * MARK: DDLogFormatter
      */
-    func formatLogMessage(logMessage: DDLogMessage!) -> String! {
+    override func formatLogMessage(logMessage: DDLogMessage!) -> String! {
         var logLevel: String
         
         switch (logMessage.flag) {
@@ -34,6 +29,6 @@ class AppLogFormatter: NSObject, DDLogFormatter {
         
         let dateAndTime = threadUnsafeDateFormatter.stringFromDate(logMessage.timestamp)
         
-        return "\(dateAndTime) \(logLevel)(\(logMessage.threadID)) \(logMessage.fileName)#\(logMessage.function)[\(logMessage.line)] \(logMessage.message)"
+        return "\(dateAndTime) \(logLevel)[\(AppFileLogFormatter.bundleShortVersion)(\(AppFileLogFormatter.bundleVersion))](\(logMessage.threadID)) \(logMessage.fileName)#\(logMessage.function)[\(logMessage.line)] \(logMessage.message)"
     }
 }

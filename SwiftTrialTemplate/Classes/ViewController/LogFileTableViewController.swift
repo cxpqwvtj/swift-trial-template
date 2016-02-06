@@ -56,7 +56,27 @@ class LogFileTableViewController: UITableViewController {
     }
 
     func rightBarButtonTapped() {
-        DLog("")
+        var message: String
+        var alertAction: UIAlertAction
+        if viewModel.existsSelectedItem() {
+            message = "選択したログを送信するよ？"
+            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { (action) -> Void in
+                ILog("")
+                
+            })
+        } else {
+            message = "すべてのログを送信するよ？"
+            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { (action) -> Void in
+                ILog("")
+            })
+        }
+        DLog("\(message)")
+        let alert = BaseAlertController(title: "", message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "キャンセル", style: .Default, handler: { (action) -> Void in
+            DLog("キャンセル")
+        }))
+        alert.addAction(alertAction)
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source

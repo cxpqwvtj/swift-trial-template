@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1003304B1C4E622000A02985 /* LogFileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1003304A1C4E622000A02985 /* LogFileTableViewController.swift */; };
 		100E02A81C65BB0F00D0EB06 /* AppFileLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E02A71C65BB0F00D0EB06 /* AppFileLogFormatter.swift */; };
+		100E02AA1C65C32800D0EB06 /* BaseAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E02A91C65C32800D0EB06 /* BaseAlertController.swift */; };
 		100F1A471C4B855D002365D7 /* SwiftTrialTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F1A461C4B855D002365D7 /* SwiftTrialTemplateTests.swift */; };
 		100F1A521C4B855D002365D7 /* SwiftTrialTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F1A511C4B855D002365D7 /* SwiftTrialTemplateUITests.swift */; };
 		100F1A691C4C4C48002365D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100F1A601C4C4C48002365D7 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		1003304A1C4E622000A02985 /* LogFileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFileTableViewController.swift; sourceTree = "<group>"; };
 		100E02A71C65BB0F00D0EB06 /* AppFileLogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFileLogFormatter.swift; sourceTree = "<group>"; };
+		100E02A91C65C32800D0EB06 /* BaseAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAlertController.swift; sourceTree = "<group>"; };
 		100F1A2E1C4B855D002365D7 /* SwiftTrialTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTrialTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		100F1A421C4B855D002365D7 /* SwiftTrialTemplateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftTrialTemplateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		100F1A461C4B855D002365D7 /* SwiftTrialTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTrialTemplateTests.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		100F1A721C4C55B1002365D7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				100E02A91C65C32800D0EB06 /* BaseAlertController.swift */,
 				10D40A5B1C655E30008F86E9 /* BaseViewController.swift */,
 				1003304A1C4E622000A02985 /* LogFileTableViewController.swift */,
 				10FCE2A31C5CD59A0095F79A /* LogMessageTableViewController.swift */,
@@ -430,6 +433,7 @@
 				1003304B1C4E622000A02985 /* LogFileTableViewController.swift in Sources */,
 				100E02A81C65BB0F00D0EB06 /* AppFileLogFormatter.swift in Sources */,
 				100F1A741C4C5698002365D7 /* MainViewController.swift in Sources */,
+				100E02AA1C65C32800D0EB06 /* BaseAlertController.swift in Sources */,
 				10FCE2AA1C6015EE0095F79A /* LogMessageTableViewCell.swift in Sources */,
 				100F1A781C4C59A6002365D7 /* AppLogger.swift in Sources */,
 				10FCE29B1C5033A00095F79A /* LogFileViewModel.swift in Sources */,

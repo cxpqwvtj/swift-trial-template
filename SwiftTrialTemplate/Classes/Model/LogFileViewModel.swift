@@ -10,4 +10,13 @@ import UIKit
 
 class LogFileViewModel: NSObject {
     var rows = [LogFileRowModel]()
+
+    func existsSelectedItem() -> Bool {
+        for row in rows {
+            if row.selected {
+                return true
+            }
+        }
+        return false
+    }
 }

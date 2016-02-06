@@ -9,21 +9,21 @@
 import UIKit
 import SSZipArchive
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        VLog("")
-        let button1 = UIButton(frame: CGRectMake(50.0, 100.0, 200.0, 29.0))
+        VLog("\(__FUNCTION__)")
+        let button1 = BaseButton(frame: CGRectMake(50.0, 100.0, 200.0, 29.0))
         button1.backgroundColor = UIColor.grayColor()
         button1.setTitle("ログファイル一覧", forState: UIControlState.Normal)
         button1.addTarget(self, action: "tapButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(button1)
 
-        let button2 = UIButton(frame: CGRectMake(50.0, 130.0, 200.0, 29.0))
+        let button2 = BaseButton(frame: CGRectMake(50.0, 130.0, 200.0, 29.0))
         button2.backgroundColor = UIColor.grayColor()
         button2.setTitle("ログファイル切り替え", forState: UIControlState.Normal)
-        button2.addTarget(self, action: "tapButton2:", forControlEvents: .TouchUpInside)
+        button2.addTarget(self, action: "tapButton2:event:", forControlEvents: .TouchUpInside)
         self.view.addSubview(button2)
     }
 
@@ -33,12 +33,11 @@ class MainViewController: UIViewController {
     }
 
     func tapButton(sender: UIButton) {
-        DLog("\(sender)")
+        ILog("")
         self.navigationController?.pushViewController(LogFileTableViewController(style: UITableViewStyle.Plain), animated: true)
     }
 
-    func tapButton2(sender: UIButton) {
-        DLog("\(sender)")
+    func tapButton2(sender: UIButton, event: UIEvent) {
         DLog("[ROLL BEFORE]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")
         AppLogger.sharedInstance.devFileLogger.rollLogFileWithCompletionBlock {
             DLog("[ROLL AFTER]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")

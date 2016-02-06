@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navi.view.backgroundColor = UIColor.whiteColor()
         window?.rootViewController = navi
         window?.makeKeyAndVisible()
+        DLog("[devide name]\(UIDevice.currentDevice().name) [model]\(UIDevice.currentDevice().model) [systemName]\(UIDevice.currentDevice().systemName) [localizedModel]\(UIDevice.currentDevice().localizedModel) [systemVersion]\(UIDevice.currentDevice().systemVersion) []\(UIDevice.currentDevice())")
         return true
     }
 

@@ -100,7 +100,7 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        ILog("")
+        ILog("tap accessoryButton\(indexPath)")
         if let filePath = viewModel.rows[indexPath.row].logFileInfo?.filePath {
             self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: filePath), animated: true)
         }

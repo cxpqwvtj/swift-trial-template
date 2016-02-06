@@ -34,6 +34,6 @@ class AppLogFormatter: NSObject, DDLogFormatter {
         
         let dateAndTime = threadUnsafeDateFormatter.stringFromDate(logMessage.timestamp)
         
-        return "\(dateAndTime) \(logLevel)(\(logMessage.threadID)) \(logMessage.fileName)#\(logMessage.function)[\(logMessage.line)] \(logMessage.message)"
+        return "\(dateAndTime) \(logLevel)(\(logMessage.threadID)) \(logMessage.fileName)[\(logMessage.line)] \(logMessage.message)"
     }
 }

@@ -100,9 +100,10 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let row = viewModel.rows[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogFileTableViewCell
-        setupLabel(cell.label, message: viewModel.rows[indexPath.row].logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
-        cell.selectedMarker.hidden = !viewModel.rows[indexPath.row].selected
+        setupLabel(cell.label, message: row.logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
+        cell.selectedMarker.hidden = !row.selected
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         return cell
     }
@@ -116,7 +117,9 @@ class LogFileTableViewController: UITableViewController {
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
             })
         }
-        viewModel.rows[indexPath.row].selected = !viewModel.rows[indexPath.row].selected
+        if indexPath.section == 0 {
+            viewModel.rows[indexPath.row].selected = !viewModel.rows[indexPath.row].selected
+        }
     }
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {

@@ -11,6 +11,10 @@ import CocoaLumberjack
 
 class LogFileRowModel: NSObject {
 
-    var logFileInfo: DDLogFileInfo?
+    var logFileInfo: DDLogFileInfo
     var selected = false
+
+    init(logFileInfo: DDLogFileInfo) {
+        self.logFileInfo = logFileInfo
+    }
 }

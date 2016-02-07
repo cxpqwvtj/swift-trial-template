@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import SSZipArchive
 
 class AppLogFileManager: DDLogFileManagerDefault {
 
@@ -30,11 +31,34 @@ class AppLogFileManager: DDLogFileManagerDefault {
     }
 
     override func didArchiveLogFile(logFilePath: String!) {
-        ILog(self.appInfo())
+        DLog(self.appInfo())
     }
 
     override func didRollAndArchiveLogFile(logFilePath: String!) {
-        ILog(self.appInfo())
+        DLog(self.appInfo())
+    }
+
+    func postLogFile(logFile: DDLogFileInfo) {
+        let archivedDir = "\(logsDirectory())/archive"
+        let fileManager = NSFileManager.defaultManager()
+        if !fileManager.fileExistsAtPath(archivedDir) {
+            do {
+                try fileManager.createDirectoryAtPath(archivedDir, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                WLog("\(error)")
+            }
+        }
+        if logFile == AppLogger.sharedInstance.devFileLogger.currentLogFileInfo() {
+            VLog("\(logFile.fileName) is current log file")
+            AppLogger.sharedInstance.devFileLogger.rollLogFileWithCompletionBlock({[unowned self] () -> Void in
+                let latestArchiveFile = AppLogger.sharedInstance.devFileLogManager.sortedLogFileInfos()[1] as! DDLogFileInfo // アーカイブされたファイル
+                VLog("to zip file.\(latestArchiveFile.filePath)")
+                SSZipArchive.createZipFileAtPath("\(self.logsDirectory())/archive/\(latestArchiveFile.filePath).zip", withFilesAtPaths: [latestArchiveFile.filePath])
+            })
+        } else {
+            VLog("to zip file.\(logFile.filePath)")
+            SSZipArchive.createZipFileAtPath("\(logsDirectory())/archive/\(logFile.fileName).zip", withFilesAtPaths: [logFile.filePath])
+        }
     }
 
     private func appInfo() -> String {

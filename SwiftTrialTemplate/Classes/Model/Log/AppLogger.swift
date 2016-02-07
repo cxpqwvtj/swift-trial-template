@@ -11,9 +11,19 @@ import CocoaLumberjack
 
 class AppLogger: NSObject {
     static let sharedInstance = AppLogger()
-    let devFileLogger = DDFileLogger(logFileManager: AppLogFileManager())
-    let extFileLogger: DDFileLogger = DDFileLogger(logFileManager: AppLogFileManager(logsDirectory: "\(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])/Logs/ext"))
+    let devFileLogManager: AppLogFileManager
+    let devFileLogger: DDFileLogger
+    let extFileLogManager: AppLogFileManager
+    let extFileLogger: DDFileLogger
 
+    override init() {
+        devFileLogManager = AppLogFileManager()
+        devFileLogger = DDFileLogger(logFileManager: devFileLogManager)
+        extFileLogManager = AppLogFileManager(logsDirectory: "\(NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0])/Logs/ext")
+        extFileLogger = DDFileLogger(logFileManager: extFileLogManager)
+        super.init()
+    }
+    
     func setup() {
         setenv("XcodeColors", "YES", 0);
         DDTTYLogger.sharedInstance().logFormatter = AppLogFormatter()

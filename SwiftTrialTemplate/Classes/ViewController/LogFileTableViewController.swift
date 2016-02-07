@@ -26,8 +26,7 @@ class LogFileTableViewController: UITableViewController {
 //        }
 
         for logFileInfo in AppLogger.sharedInstance.devFileLogger.logFileManager.sortedLogFileInfos() as! [DDLogFileInfo] {
-            let model = LogFileRowModel()
-            model.logFileInfo = logFileInfo
+            let model = LogFileRowModel(logFileInfo: logFileInfo)
             viewModel.rows.append(model)
         }
         super.init(style: style)
@@ -60,14 +59,33 @@ class LogFileTableViewController: UITableViewController {
         var alertAction: UIAlertAction
         if viewModel.existsSelectedItem() {
             message = "選択したログを送信するよ？"
-            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { (action) -> Void in
-                ILog("")
-                
+            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { [unowned self](action) -> Void in
+                ILog("ログ選択送信")
+                for rowModel in self.viewModel.rows {
+                    if rowModel.selected {
+                        DLog("\(rowModel.logFileInfo.fileName)")
+                    }
+                }
+                for rowModel in self.viewModel.rows.reverse() {
+                    if rowModel.logFileInfo.isArchived {
+                        // logFileInfoを送信
+                    } else {
+                        // archiveしてから送信
+                        rowModel.logFileInfo.isArchived = true
+                        DLog("[Archive]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")
+                        AppLogger.sharedInstance.devFileLogger.rollLogFileWithCompletionBlock {
+                            DLog("[NewFile]\(AppLogger.sharedInstance.devFileLogger.currentLogFileInfo().fileName)")
+                        }
+                    }
+                }
             })
         } else {
             message = "すべてのログを送信するよ？"
             alertAction = UIAlertAction(title: "送信", style: .Default, handler: { (action) -> Void in
                 ILog("")
+                for rowModel in self.viewModel.rows.reverse() {
+                    AppLogger.sharedInstance.devFileLogManager.postLogFile(rowModel.logFileInfo)
+                }
             })
         }
         DLog("\(message)")
@@ -94,7 +112,7 @@ class LogFileTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let label = UILabel()
-        setupLabel(label, message: viewModel.rows[indexPath.row].logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
+        setupLabel(label, message: viewModel.rows[indexPath.row].logFileInfo.fileName, tableViewWidth: tableView.bounds.width)
         let height = label.frame.height + 2
         return (height < 30) ? 30 : height
     }
@@ -102,7 +120,7 @@ class LogFileTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let row = viewModel.rows[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(LogFileTableViewController.CELL_REUSE_ID, forIndexPath: indexPath) as! LogFileTableViewCell
-        setupLabel(cell.label, message: row.logFileInfo?.fileName, tableViewWidth: tableView.bounds.width)
+        setupLabel(cell.label, message: row.logFileInfo.fileName, tableViewWidth: tableView.bounds.width)
         cell.selectedMarker.hidden = !row.selected
         cell.accessoryType = UITableViewCellAccessoryType.DetailButton
         return cell
@@ -124,7 +142,7 @@ class LogFileTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         ILog("tap accessoryButton\(indexPath)")
-        if let filePath = viewModel.rows[indexPath.row].logFileInfo?.filePath {
+        if let filePath = viewModel.rows[indexPath.row].logFileInfo.filePath {
             self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: filePath), animated: true)
         }
     }

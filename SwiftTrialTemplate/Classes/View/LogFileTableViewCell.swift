@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogFileTableViewCell: UITableViewCell {
+class LogFileTableViewCell: BaseTableViewCell {
     let label = UILabel()
     let selectedMarker = UIView()
     static let HORIZON_MERGIN = CGFloat(53)

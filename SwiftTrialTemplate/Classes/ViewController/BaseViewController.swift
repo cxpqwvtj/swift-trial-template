@@ -10,9 +10,9 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        DLog("\(NSStringFromClass(self.dynamicType))")
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        ILog("\(NSStringFromClass(self.dynamicType))")
     }
 
     override func didReceiveMemoryWarning() {

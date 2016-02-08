@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogMessageTableViewCell: UITableViewCell {
+class LogMessageTableViewCell: BaseTableViewCell {
     let label = UILabel()
     static let HORIZON_MERGIN = CGFloat(20)
     

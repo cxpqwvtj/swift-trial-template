@@ -8,28 +8,26 @@
 
 import UIKit
 
+extension UIAlertAction {
+    convenience init(title: String?, handler: ((UIAlertAction) -> Void)?) {
+        self.init(title: title, style: .Default, handler: { (action: UIAlertAction) -> Void in
+            DLog("\((action.title ?? "")!)")
+            if let h = handler {
+                h(action)
+            }
+        })
+    }
+}
+
 class BaseAlertController: UIAlertController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        ILog("[title]\((self.title ?? "")!) [message]\((self.message ?? "")!)")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        WLog("\(NSStringFromClass(self.dynamicType))#\(__FUNCTION__)")
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

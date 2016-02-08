@@ -33,7 +33,6 @@ class MainViewController: BaseViewController {
     }
 
     func tapButton(sender: UIButton) {
-        ILog("")
         self.navigationController?.pushViewController(LogFileTableViewController(style: UITableViewStyle.Plain), animated: true)
     }
 

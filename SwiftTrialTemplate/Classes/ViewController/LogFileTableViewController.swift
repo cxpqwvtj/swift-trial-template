@@ -55,12 +55,13 @@ class LogFileTableViewController: UITableViewController {
     }
 
     func rightBarButtonTapped() {
+        DLog("\(__FUNCTION__)")
         var message: String
         var alertAction: UIAlertAction
         if viewModel.existsSelectedItem() {
             message = "選択したログを送信するよ？"
-            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { [unowned self](action) -> Void in
-                ILog("ログ選択送信")
+            alertAction = UIAlertAction(title: "送信", handler: { [unowned self](action) -> Void in
+                ILog("\(action.title ?? nil)")
                 for rowModel in self.viewModel.rows {
                     if rowModel.selected {
                         DLog("\(rowModel.logFileInfo.fileName)")
@@ -81,18 +82,14 @@ class LogFileTableViewController: UITableViewController {
             })
         } else {
             message = "すべてのログを送信するよ？"
-            alertAction = UIAlertAction(title: "送信", style: .Default, handler: { (action) -> Void in
-                ILog("")
+            alertAction = UIAlertAction(title: "送信", handler: { (action) -> Void in
                 for rowModel in self.viewModel.rows.reverse() {
                     AppLogger.sharedInstance.devFileLogManager.postLogFile(rowModel.logFileInfo)
                 }
             })
         }
-        DLog("\(message)")
         let alert = BaseAlertController(title: "", message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "キャンセル", style: .Default, handler: { (action) -> Void in
-            DLog("キャンセル")
-        }))
+        alert.addAction(UIAlertAction(title: "キャンセル", handler: nil))
         alert.addAction(alertAction)
         presentViewController(alert, animated: true, completion: nil)
     }

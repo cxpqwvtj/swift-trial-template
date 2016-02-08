@@ -20,6 +20,6 @@ class BaseButton: UIButton {
     }
 
     func touchUpInside(sender: UIButton, event: UIEvent) {
-        DLog("[class]\(NSStringFromClass(sender.dynamicType)) [frame]\(sender.frame)")
+        DLog("tap \((sender.titleLabel?.text ?? "")!) [frame]\(sender.frame)")
     }
 }

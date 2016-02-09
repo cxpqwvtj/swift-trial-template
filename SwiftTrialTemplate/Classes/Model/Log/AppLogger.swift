@@ -69,5 +69,9 @@ public func ELog(@autoclosure logText: () -> String, level: DDLogLevel = default
 }
 
 public func ExtLog(@autoclosure logText: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = false) {
-    CocoaLumberjack.DDLogInfo(logText, level: level, context: context, file: file, function: function, line: line, tag: ExternalLogFormatter.EXT_LOG_TAG, asynchronous: async)
+    CocoaLumberjack.DDLogDebug(logText, level: level, context: context, file: file, function: function, line: line, tag: ExternalLogFormatter.EXT_LOG_TAG, asynchronous: async)
+}
+
+public func OpeLog(@autoclosure logText: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = false) {
+    CocoaLumberjack.DDLogDebug(logText, level: level, context: context, file: file, function: function, line: line, tag: ExternalLogFormatter.OPE_LOG_TAG, asynchronous: async)
 }

@@ -9,16 +9,25 @@
 import UIKit
 
 class BaseTableViewCell: UITableViewCell {
-
-    override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        if touch.phase == .Ended {
-            DLog("")
+    
+    override var description: String {
+        get {
+            fatalError("description has not been implemented")
         }
-        DLog("\(touch.phase) [frame]\(self.frame)")
-        return true
     }
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        DLog("\(gestureRecognizer.state)")
-        return true
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        let gesture = UITapGestureRecognizer(target: self, action: "tapGesture:")
+        gesture.cancelsTouchesInView = false
+        self.addGestureRecognizer(gesture)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func tapGesture(sender: UITapGestureRecognizer) {
+        DLog("[tap TableViewCell]\(self)")
     }
 }

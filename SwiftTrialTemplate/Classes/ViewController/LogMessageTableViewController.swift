@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogMessageTableViewController: UITableViewController {
+class LogMessageTableViewController: BaseTableViewController {
     
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
     let logFilePath: String

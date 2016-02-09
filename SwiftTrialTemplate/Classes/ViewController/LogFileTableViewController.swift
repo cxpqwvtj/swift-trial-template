@@ -9,7 +9,7 @@
 import UIKit
 import CocoaLumberjack
 
-class LogFileTableViewController: UITableViewController {
+class LogFileTableViewController: BaseTableViewController {
 
     private static let CELL_REUSE_ID = "simpleTableViewCellId"
     var viewModel = LogFileViewModel()
@@ -51,7 +51,7 @@ class LogFileTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        VLog("")
+        WLog("")
     }
 
     func rightBarButtonTapped() {
@@ -124,7 +124,6 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DLog("\(indexPath)")
         NSOperationQueue().addOperationWithBlock { () -> Void in
             NSThread.sleepForTimeInterval(0.1)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -138,7 +137,7 @@ class LogFileTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        ILog("tap accessoryButton\(indexPath)")
+        DLog("tap accessoryButton\(indexPath)")
         if let filePath = viewModel.rows[indexPath.row].logFileInfo.filePath {
             self.navigationController?.pushViewController(LogMessageTableViewController(style: UITableViewStyle.Plain, logFilePath: filePath), animated: true)
         }

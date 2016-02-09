@@ -13,6 +13,12 @@ class LogFileTableViewCell: BaseTableViewCell {
     let selectedMarker = UIView()
     static let HORIZON_MERGIN = CGFloat(53)
 
+    override var description: String {
+        get {
+            return label.text ?? ""
+        }
+    }
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(label)

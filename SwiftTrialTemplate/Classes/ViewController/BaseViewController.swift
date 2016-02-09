@@ -12,7 +12,7 @@ class BaseViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        ILog("\(NSStringFromClass(self.dynamicType))")
+        ILog("\(NSStringFromClass(self.dynamicType))#\(__FUNCTION__)")
     }
 
     override func didReceiveMemoryWarning() {

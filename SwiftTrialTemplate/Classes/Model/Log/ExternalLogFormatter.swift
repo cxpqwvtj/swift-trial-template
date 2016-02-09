@@ -11,8 +11,6 @@ import CocoaLumberjack
 
 class ExternalLogFormatter: NSObject, DDLogFormatter {
 
-    static let EXT_LOG_TAG = "external"
-    static let OPE_LOG_TAG = "operation"
     private(set) var threadUnsafeDateFormatter: NSDateFormatter
 
     internal override init() {
@@ -37,7 +35,7 @@ class ExternalLogFormatter: NSObject, DDLogFormatter {
 
         if logMessage.flag == DDLogFlag.Info {
             if let tag = logMessage.tag {
-                if tag as! String != ExternalLogFormatter.EXT_LOG_TAG {
+                if tag as! String != AppLogFormatter.EXT_LOG_TAG {
                     return nil
                 }
             } else {

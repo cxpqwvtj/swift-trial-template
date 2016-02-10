@@ -11,6 +11,7 @@ import CocoaLumberjack
 
 class AppLogFormatter: NSObject, DDLogFormatter {
 
+    static let DEV_LOG_TAG = "develop"
     static let EXT_LOG_TAG = "external"
     static let OPE_LOG_TAG = "operation"
     private(set) var threadUnsafeDateFormatter: NSDateFormatter

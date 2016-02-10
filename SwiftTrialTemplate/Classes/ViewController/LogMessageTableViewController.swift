@@ -75,7 +75,6 @@ class LogMessageTableViewController: BaseTableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        DLog("\(indexPath)")
         NSOperationQueue().addOperationWithBlock { () -> Void in
             NSThread.sleepForTimeInterval(0.1)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in

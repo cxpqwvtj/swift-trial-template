@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (3.2.0)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -9,10 +10,12 @@ PODS:
   - SSZipArchive (1.0.1)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.0)
   - CocoaLumberjack/Swift (~> 2.2)
   - SSZipArchive (~> 1.0)
 
 SPEC CHECKSUMS:
+  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   SSZipArchive: 5f30a0af2cb3d48c0ff83b1e18029f7041ac3c38
 

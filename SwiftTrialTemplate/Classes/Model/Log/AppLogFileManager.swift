@@ -58,33 +58,34 @@ class AppLogFileManager: DDLogFileManagerDefault {
             })
         } else {
             VLog("to zip file.\(logFile.filePath)")
-            let zipFilePath = "\(logsDirectory())/archive/\(logFile.fileName).zip"
-            SSZipArchive.createZipFileAtPath(zipFilePath, withFilesAtPaths: [logFile.filePath])
+            let zipFileName = "\(logFile.fileName).zip"
+            let zipFilePath = "\(logsDirectory())/archive/\(zipFileName)"
+            if fileManager.fileExistsAtPath(zipFilePath) {
+                DLog("zip file exists.")
+            } else {
+                SSZipArchive.createZipFileAtPath(zipFilePath, withFilesAtPaths: [logFile.filePath])
+            }
             let fileUrl = NSURL(fileURLWithPath: zipFilePath)
             Alamofire.upload(.POST, "http://localhost:8080/api/upload"
-                , multipartFormData: { (multipartFormData) -> Void in
-                    multipartFormData.appendBodyPart(fileURL: fileUrl, name: "zipLogFile")
+                , multipartFormData: { (multipartData) -> Void in
+                    multipartData.appendBodyPart(fileURL: fileUrl, name: "zipLogFile", fileName: zipFileName, mimeType: "application/zip")
                     do {
                         let json = try NSJSONSerialization.dataWithJSONObject(["jsonkey":"value"], options: NSJSONWritingOptions.PrettyPrinted)
-                        multipartFormData.appendBodyPart(data: json, name: "json")
+                        multipartData.appendBodyPart(data: json, name: "fileInfo", mimeType: "application/json")
                     } catch let error as NSError {
                         WLog("\(error)")
                     }
                 }, encodingCompletion: { (encodingResult) -> Void in
                     switch encodingResult {
-                    case .Success(let upload, _, _):
-                        upload.responseJSON { response in
+                    case .Success(let request, _, _):
+                        ExtLog("\(request)")
+                        request.responseJSON { response in
                             ExtLog("\(response)")
                         }
                     case .Failure(let encodingError):
                         ExtLog("\(encodingError)")
                     }
             })
-            Alamofire.upload(.POST, "http://localhost:8080/api/upload", file: fileUrl)
-                .progress { bytesWritten, totalBytesWritten, totalBytesExpectedToWrite in
-                    DLog("[bytesWritten]\(bytesWritten) [totalBytesWritten]\(totalBytesWritten) [totalBytesExpectedToWrite]\(totalBytesExpectedToWrite)")
-            }
-            ExtLog("[POST]http://localhost:8080/api/upload [data]\(zipFilePath)")
         }
     }
 

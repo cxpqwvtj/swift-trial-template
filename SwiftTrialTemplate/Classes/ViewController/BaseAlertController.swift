@@ -11,7 +11,7 @@ import UIKit
 extension UIAlertAction {
     convenience init(title: String?, handler: ((UIAlertAction) -> Void)?) {
         self.init(title: title, style: .Default, handler: { (action: UIAlertAction) -> Void in
-            DLog("\((action.title ?? "")!)")
+            OpeLog("[ACTION][TAP]\((action.title ?? "")!)")
             if let h = handler {
                 h(action)
             }
@@ -23,7 +23,7 @@ class BaseAlertController: UIAlertController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        ILog("[title]\((self.title ?? "")!) [message]\((self.message ?? "")!)")
+        ILog("[ALART][title]\((self.title ?? "")!) [message]\((self.message ?? "")!)")
     }
 
     override func didReceiveMemoryWarning() {

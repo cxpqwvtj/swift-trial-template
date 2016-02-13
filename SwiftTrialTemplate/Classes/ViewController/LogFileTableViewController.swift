@@ -61,15 +61,10 @@ class LogFileTableViewController: BaseTableViewController {
         if viewModel.existsSelectedItem() {
             message = "選択したログを送信するよ？"
             alertAction = UIAlertAction(title: "送信", handler: { [unowned self](action) -> Void in
-                ILog("\(action.title ?? nil)")
-                for rowModel in self.viewModel.rows {
-                    if rowModel.selected {
-                        DLog("\(rowModel.logFileInfo.fileName)")
-                    }
-                }
-                for rowModel in self.viewModel.rows.reverse() {
+                for rowModel in self.viewModel.rows.reverse() where rowModel.selected {
                     if rowModel.logFileInfo.isArchived {
                         // logFileInfoを送信
+                        AppLogger.sharedInstance.devFileLogManager.postLogFile(rowModel.logFileInfo)
                     } else {
                         // archiveしてから送信
                         rowModel.logFileInfo.isArchived = true

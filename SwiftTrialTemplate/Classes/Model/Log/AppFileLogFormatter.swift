@@ -29,6 +29,6 @@ class AppFileLogFormatter: AppLogFormatter {
         
         let dateAndTime = threadUnsafeDateFormatter.stringFromDate(logMessage.timestamp)
         
-        return "\(dateAndTime) \(logLevel)[\(AppFileLogFormatter.bundleShortVersion)(\(AppFileLogFormatter.bundleVersion))](\(logMessage.threadID)) \(logMessage.fileName)#\(logMessage.function)[\(logMessage.line)][\(logMessage.tag)] \(logMessage.message)"
+        return "\(dateAndTime) \(logLevel)[\(AppFileLogFormatter.bundleShortVersion)(\(AppFileLogFormatter.bundleVersion))](\(logMessage.threadID))[\(logMessage.tag)] \(logMessage.fileName)#\(logMessage.function)[\(logMessage.line)] \(logMessage.message)"
     }
 }

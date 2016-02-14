@@ -11,7 +11,7 @@ import UIKit
 extension UIAlertAction {
     convenience init(title: String?, handler: ((UIAlertAction) -> Void)?) {
         self.init(title: title, style: .Default, handler: { (action: UIAlertAction) -> Void in
-            OpeLog("[ACTION][TAP]\((action.title ?? "")!)")
+            OpeLog("[OPE][TAP]\((action.title ?? "")!)")
             if let h = handler {
                 h(action)
             }

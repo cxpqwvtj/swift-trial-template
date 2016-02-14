@@ -28,6 +28,6 @@ class BaseTableViewCell: UITableViewCell {
     }
 
     func tapGesture(sender: UITapGestureRecognizer) {
-        OpeLog("[ACTION][TAP]\(self)")
+        OpeLog("[OPE][TAP]\(self)")
     }
 }

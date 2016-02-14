@@ -20,6 +20,6 @@ class BaseButton: UIButton {
     }
 
     func touchUpInside(sender: UIButton, event: UIEvent) {
-        OpeLog("[ACTION][TAP]\((sender.titleLabel?.text ?? "")!) [frame]\(sender.frame)")
+        OpeLog("[OPE][TAP]\((sender.titleLabel?.text ?? "")!) [frame]\(sender.frame)")
     }
 }

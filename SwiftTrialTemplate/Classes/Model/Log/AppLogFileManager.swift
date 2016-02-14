@@ -79,7 +79,9 @@ class AppLogFileManager: DDLogFileManagerDefault {
                     switch encodingResult {
                     case .Success(let request, _, _):
                         ExtLog("\(request)")
-                        request.responseJSON { response in
+                        request.progress({ (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) -> Void in
+                            DLog("[bytesWritten]\(bytesWritten) [totalBytesWritten]\(totalBytesWritten) [totalBytesExpectedToWrite]\(totalBytesExpectedToWrite)")
+                        }).responseJSON { response in
                             ExtLog("\(response)")
                         }
                     case .Failure(let encodingError):

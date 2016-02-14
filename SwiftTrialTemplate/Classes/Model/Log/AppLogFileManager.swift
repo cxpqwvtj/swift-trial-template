@@ -70,7 +70,9 @@ class AppLogFileManager: DDLogFileManagerDefault {
                 , multipartFormData: { (multipartData) -> Void in
                     multipartData.appendBodyPart(fileURL: fileUrl, name: "zipLogFile", fileName: zipFileName, mimeType: "application/zip")
                     do {
-                        let json = try NSJSONSerialization.dataWithJSONObject(["jsonkey":"value"], options: NSJSONWritingOptions.PrettyPrinted)
+                        let device = UIDevice.currentDevice()
+                        let obj = ["name":"\(device.name)", "model":"\(device.model)", "localizeModel":"\(device.localizedModel)", "systemName":"\(device.systemName)", "systemVersion":"\(device.systemVersion)"]
+                        let json = try NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions.PrettyPrinted)
                         multipartData.appendBodyPart(data: json, name: "fileInfo", mimeType: "application/json")
                     } catch let error as NSError {
                         WLog("\(error)")
